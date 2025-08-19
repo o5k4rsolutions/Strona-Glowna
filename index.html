@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O5K4R Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f3f4f6;
+            color: #374151;
+            padding-bottom: 80px;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        @keyframes scroll-logos {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-100%);
+            }
+        }
+        
+        #logo-slider {
+            display: flex;
+            width: fit-content;
+            animation: scroll-logos 30s linear infinite;
+        }
+        
+        .logos-container {
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .hidden-section {
+            display: none;
+        }
+
+        .accordion-item {
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .accordion-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            padding: 0 1rem;
+        }
+        .accordion-content.open {
+            max-height: 500px;
+            padding: 1rem;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 50;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-gray-800" id="show-home-logo">O5K4R Solutions</a>
+            <div class="hidden md:flex space-x-6">
+                <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors" id="show-home-desktop">Strona główna</a>
+                <a href="#uslugi" class="text-gray-600 hover:text-gray-900 transition-colors">Usługi</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors" id="show-detailed-portfolio">Portfolio</a>
+                <a href="#zaufali-nam" class="text-gray-600 hover:text-gray-900 transition-colors">Zaufali nam</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors" id="show-faq">FAQ</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors" id="show-about">O nas</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors" id="show-contact">Kontakt</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-gray-600 hover:text-gray-900 transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg py-2">
+            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 transition-colors" id="show-home-mobile">Strona główna</a>
+            <a href="#uslugi" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 transition-colors">Usługi</a>
+            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 transition-colors" id="show-detailed-portfolio-mobile">Portfolio</a>
+            <a href="#zaufali-nam" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 transition-colors">Zaufali nam</a>
+            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 transition-colors" id="show-faq-mobile">FAQ</a>
+            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 transition-colors" id="show-about-mobile">O nas</a>
+            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 transition-colors" id="show-contact-mobile">Kontakt</a>
+        </div>
+    </header>
+
+    <main>
+        <div id="main-content">
+            <section class="bg-gray-900 text-white py-24 md:py-32">
+                <div class="container mx-auto px-4 text-center">
+                    <h1 class="text-4xl md:text-6xl font-extrabold mb-4">Tworzymy Cyfrową Rzeczywistość</h1>
+                    <p class="text-lg md:text-xl text-gray-300 mb-8">Od profesjonalnych stron internetowych po innowacyjne systemy i wciągające światy w Roblox Studio.</p>
+                    <a href="#uslugi" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-transform transform hover:scale-105">
+                        Odkryj nasze usługi
+                    </a>
+                </div>
+            </section>
+
+            <section id="uslugi" class="py-16 md:py-24 bg-gray-50">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Nasze Usługi</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="bg-white p-8 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300">
+                            <div class="flex justify-center mb-4">
+                                <svg class="w-16 h-16 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9.25 10m-2 7h2m-2-7h2m2 7V10m-2 7h2m2 0V10m-2 7h2m2-7h2m-2 7h2m2 0V10M5.25 17H4.75M4 10h16a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V11a1 1 0 011-1z"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-semibold text-center mb-2">Strony Internetowe</h3>
+                            <p class="text-gray-600 text-center">Tworzymy nowoczesne i responsywne strony www, które przyciągają klientów i budują silną markę online.</p>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300">
+                            <div class="flex justify-center mb-4">
+                                <svg class="w-16 h-16 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 21h4M12 10.5V1.5m0 9v9m0-9H8.5m3.5 0H15.5m-3.5 0v3m0 0v3m0-3h3.5m-3.5 0H8.5"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-semibold text-center mb-2">Systemy</h3>
+                            <p class="text-gray-600 text-center">Projektujemy i wdrażamy skalowalne systemy, które automatyzują procesy i zwiększają efektywność Twojego biznesu.</p>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300">
+                            <div class="flex justify-center mb-4">
+                                <svg class="w-16 h-16 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21.75c-4.418 0-8-3.582-8-8s3.582-8 8-8 8 3.582 8 8-3.582 8-8 8zm0 0V1.5m0 20.25c4.418 0 8-3.582 8-8M4 13.75c0-4.418 3.582-8 8-8"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-semibold text-center mb-2">Projekty Roblox Studio</h3>
+                            <p class="text-gray-600 text-center">Tworzymy zaawansowane i wciągające gry oraz doświadczenia w uniwersum Roblox, które zachwycają graczy.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="zaufali-nam" class="py-16 md:py-24 bg-gray-50">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Zaufali nam</h2>
+                    <div class="logos-container relative overflow-hidden w-full">
+                        <div id="logo-slider" class="flex items-center no-scrollbar whitespace-nowrap">
+                            <div class="flex-shrink-0 w-48 mx-4">
+                                <img src="https://placehold.co/150x75/1e40af/ffffff?text=O5+" alt="Logo Firma A" class="w-full h-full object-contain">
+                            </div>
+                            <div class="flex-shrink-0 w-48 mx-4">
+                                <img src="https://placehold.co/150x75/059669/ffffff?text=S0L" alt="Logo Firma B" class="w-full h-full object-contain">
+                            </div>
+                            <div class="flex-shrink-0 w-48 mx-4">
+                                <img src="https://placehold.co/150x75/be185d/ffffff?text=PR0" alt="Logo Firma C" class="w-full h-full object-contain">
+                            </div>
+                            <div class="flex-shrink-0 w-48 mx-4">
+                                <img src="https://placehold.co/150x75/525252/ffffff?text=DEv" alt="Logo Firma D" class="w-full h-full object-contain">
+                            </div>
+                            <div class="flex-shrink-0 w-48 mx-4">
+                                <img src="https://placehold.co/150x75/1e40af/ffffff?text=O5+" alt="Logo Firma A" class="w-full h-full object-contain">
+                            </div>
+                            <div class="flex-shrink-0 w-48 mx-4">
+                                <img src="https://placehold.co/150x75/059669/ffffff?text=S0L" alt="Logo Firma B" class="w-full h-full object-contain">
+                            </div>
+                            <div class="flex-shrink-0 w-48 mx-4">
+                                <img src="https://placehold.co/150x75/be185d/ffffff?text=PR0" alt="Logo Firma C" class="w-full h-full object-contain">
+                            </div>
+                            <div class="flex-shrink-0 w-48 mx-4">
+                                <img src="https://placehold.co/150x75/525252/ffffff?text=DEv" alt="Logo Firma D" class="w-full h-full object-contain">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="opinie-klientow" class="py-16 md:py-24">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Co mówią o nas klienci</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="bg-white p-8 rounded-xl shadow-lg">
+                            <p class="text-gray-700 italic mb-4">"Oskar stworzył dla nas system, który zrewolucjonizował naszą pracę. Jest nie tylko utalentowanym programistą, ale też doskonale rozumie potrzeby biznesowe."</p>
+                            <div class="text-right font-semibold text-gray-800">- Anna W., CEO</div>
+                        </div>
+                        <div class="bg-white p-8 rounded-xl shadow-lg">
+                            <p class="text-gray-700 italic mb-4">"Współpraca z O5K4R Solutions przy projekcie w Roblox Studio to czysta przyjemność. Efekt końcowy przekroczył nasze najśmielsze oczekiwania!"</p>
+                            <div class="text-right font-semibold text-gray-800">- Jakub K., Twórca gier</div>
+                        </div>
+                        <div class="bg-white p-8 rounded-xl shadow-lg">
+                            <p class="text-gray-700 italic mb-4">"Zaprojektowana strona internetowa jest nie tylko piękna, ale też niezwykle funkcjonalna. Serdecznie polecam!"</p>
+                            <div class="text-right font-semibold text-gray-800">- Mariusz P., Właściciel firmy</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <section id="szczegolowe-portfolio" class="py-16 md:py-24 hidden-section">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Nasze Projekty w Szczegółach</h2>
+                <div id="portfolio-list" class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                </div>
+            </div>
+        </section>
+
+        <section id="projekt-detal" class="py-16 md:py-24 hidden-section">
+            <div class="container mx-auto px-4">
+                <button id="back-to-portfolio" class="mb-8 text-blue-600 hover:text-blue-800 transition-colors flex items-center">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                    Powrót do portfolio
+                </button>
+                <div id="project-detail-content" class="bg-white p-8 rounded-xl shadow-lg">
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="py-16 md:py-24 bg-gray-50 hidden-section">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Najczęściej zadawane pytania</h2>
+                <div class="max-w-3xl mx-auto">
+                    <div class="accordion-item bg-white p-4 rounded-xl shadow-lg mb-4">
+                        <div class="accordion-header flex justify-between items-center py-2">
+                            <span class="font-semibold text-lg">Ile kosztuje stworzenie strony internetowej?</span>
+                            <span class="text-2xl font-bold transform transition-transform duration-300">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p class="text-gray-700">Koszt jest ustalany indywidualnie w zależności od stopnia skomplikowania projektu, liczby podstron oraz wymaganych funkcjonalności. Skontaktuj się z nami, aby uzyskać bezpłatną wycenę.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item bg-white p-4 rounded-xl shadow-lg mb-4">
+                        <div class="accordion-header flex justify-between items-center py-2">
+                            <span class="font-semibold text-lg">Jak długo trwa realizacja projektu?</span>
+                            <span class="text-2xl font-bold transform transition-transform duration-300">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p class="text-gray-700">Czas realizacji zależy od złożoności projektu. Proste strony firmowe mogą być gotowe w ciągu 2-4 tygodni, natomiast bardziej zaawansowane systemy wymagają więcej czasu. Zawsze podajemy szacunkowy termin na początku współpracy.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item bg-white p-4 rounded-xl shadow-lg mb-4">
+                        <div class="accordion-header flex justify-between items-center py-2">
+                            <span class="font-semibold text-lg">Czy oferujecie wsparcie po wdrożeniu?</span>
+                            <span class="text-2xl font-bold transform transition-transform duration-300">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p class="text-gray-700">Tak, oferujemy pełne wsparcie techniczne po zakończeniu projektu. Dostępne są również pakiety serwisowe, które obejmują regularne aktualizacje i konserwację.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="o-nas" class="py-16 md:py-24 hidden-section">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">O nas</h2>
+                <p class="text-lg text-gray-700 max-w-2xl mx-auto">
+                    Nazywam się Oskar i jestem twórcą **O5K4R Solutions**. Moja przygoda z programowaniem zaczęła się od fascynacji tym,
+                    jak cyfrowe światy stają się coraz bardziej realne. Od pierwszych linii kodu na proste strony, po
+                    tworzenie zaawansowanych systemów zarządzania i wciągających gier na platformie Roblox, nieustannie
+                    dążę do doskonałości. W **O5K4R Solutions** wierzę, że kluczem do sukcesu jest połączenie
+                    kreatywności z precyzją, a każdy projekt jest szansą na stworzenie czegoś naprawdę wyjątkowego.
+                </p>
+            </div>
+        </section>
+
+        <section id="kontakt" class="py-16 md:py-24 bg-gray-50 hidden-section">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Skontaktuj się</h2>
+                <div class="max-w-xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+                    <form action="https://formspree.io/f/xyza123" method="POST">
+                        <div class="mb-4">
+                            <label for="name" class="block text-gray-700 font-medium mb-2">Imię</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div class="mb-4">
+                            <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                            <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div class="mb-4">
+                            <label for="message" class="block text-gray-700 font-medium mb-2">Wiadomość</label>
+                            <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition-colors">Wyślij</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-base md:text-lg">&copy; 2025 O5K4R Solutions. Wszelkie prawa zastrzeżone.</p>
+            <p class="mt-2 text-gray-400 text-sm">Pytanie? Napisz do nas przez formularz lub przez maila: o5k4r_solutions@opoczta.pl</p>
+        </div>
+    </footer>
+
+    <script>
+        const projects = [
+            {
+                id: '1',
+                title: 'Nowoczesna Strona Firmowa',
+                image: 'https://placehold.co/600x400/2563eb/ffffff?text=Strona+WWW',
+                description: 'Stworzenie kompleksowej, responsywnej strony internetowej dla małej firmy usługowej. Projekt obejmował design, rozwój front-end oraz optymalizację SEO.',
+                detail: {
+                    mainImage: 'https://placehold.co/800x500/2563eb/ffffff?text=Projekt+Strony',
+                    fullDescription: 'Stworzenie kompleksowej, responsywnej strony internetowej dla małej firmy usługowej. Projekt obejmował design, rozwój front-end oraz optymalizację SEO. Głównym celem było stworzenie intuicyjnej i szybkiej witryny, która efektywnie prezentuje ofertę klienta i przyciąga nowych potencjalnych klientów.',
+                    specs: [
+                        'Technologie: HTML, Tailwind CSS, Vanilla JavaScript',
+                        'Funkcjonalności: Responsywny design, formularz kontaktowy, dynamiczna galeria, sekcja z usługami, optymalizacja pod kątem wyszukiwarek (SEO)',
+                        'Wyzwania: Zapewnienie szybkiego ładowania na wszystkich urządzeniach oraz integracja z istniejącym systemem do zarządzania treścią.'
+                    ]
+                }
+            },
+            {
+                id: '2',
+                title: 'System Zarządzania Treścią',
+                image: 'https://placehold.co/600x400/10b981/ffffff?text=System+WEB',
+                description: 'Opracowanie niestandardowego systemu CMS dla portalu informacyjnego. System pozwala na łatwe dodawanie i edycję artykułów, zarządzanie użytkownikami oraz generowanie statystyk.',
+                detail: {
+                    mainImage: 'https://placehold.co/800x500/10b981/ffffff?text=System+CMS',
+                    fullDescription: 'Opracowanie niestandardowego systemu CMS dla portalu informacyjnego. System pozwala na łatwe dodawanie i edycję artykułów, zarządzanie użytkownikami oraz generowanie statystyk. Kluczowym wyzwaniem było stworzenie intuicyjnego interfejsu administracyjnego, który ułatwiłby pracę redakcji.',
+                    specs: [
+                        'Technologie: HTML, CSS, JavaScript, PHP, baza danych MySQL',
+                        'Funkcjonalności: Panel administracyjny, edytor treści WYSIWYG, zarządzanie kontami użytkowników, statystyki oglądalności',
+                        'Wyzwania: Zaprojektowanie bezpiecznej architektury bazy danych oraz optymalizacja zapytań do bazy.'
+                    ]
+                }
+            },
+            {
+                id: '3',
+                title: 'Roblox Studio - Gra "City Escape"',
+                image: 'https://placehold.co/600x400/7c3aed/ffffff?text=Roblox',
+                description: 'Stworzenie wciągającej gry logicznej w uniwersum Roblox, która wymaga od graczy współpracy w celu rozwiązania zagadek i ucieczki z miasta.',
+                detail: {
+                    mainImage: 'https://placehold.co/800x500/7c3aed/ffffff?text=Roblox+Gra',
+                    fullDescription: 'Projekt gry "City Escape" w Roblox Studio, który łączy elementy gry logicznej z dynamiczną akcją. Celem było stworzenie unikalnego doświadczenia, które angażuje graczy i promuje współpracę.',
+                    specs: [
+                        'Technologie: Lua, Roblox Studio',
+                        'Funkcjonalności: System interaktywnych zagadek, dynamiczne oświetlenie, animacje postaci, system rankingów',
+                        'Wyzwania: Optymalizacja kodu gry pod kątem wydajności na różnych urządzeniach oraz tworzenie złożonych, interaktywnych elementów.'
+                    ]
+                }
+            }
+        ];
+
+        function generatePortfolio() {
+            const portfolioList = document.getElementById('portfolio-list');
+            portfolioList.innerHTML = '';
+            projects.forEach(project => {
+                const projectHtml = `
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row">
+                        <img src="${project.image}" alt="${project.title}" class="w-full md:w-1/2 h-64 object-cover">
+                        <div class="p-6 flex-1">
+                            <h3 class="text-2xl font-semibold mb-2">${project.title}</h3>
+                            <p class="text-gray-600 mb-4">${project.description}</p>
+                            <a href="#" class="bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-700 transition-colors show-project-detail-button" data-project-id="${project.id}">Zobacz szczegóły</a>
+                        </div>
+                    </div>
+                `;
+                portfolioList.insertAdjacentHTML('beforeend', projectHtml);
+            });
+            document.querySelectorAll('.show-project-detail-button').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const projectId = this.dataset.projectId;
+                    showProjectDetailPage(projectId);
+                });
+            });
+        }
+        
+        function showProjectDetailPage(projectId) {
+            const project = projects.find(p => p.id === projectId);
+            if (!project) return;
+            const projectDetailContent = document.getElementById('project-detail-content');
+            projectDetailContent.innerHTML = '';
+            const specsHtml = project.detail.specs.map(spec => `<li>${spec}</li>`).join('');
+            const detailHtml = `
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">${project.title}</h2>
+                <img src="${project.detail.mainImage}" alt="${project.title}" class="rounded-lg mb-6 w-full object-cover">
+                <p class="text-gray-600 mb-6">${project.detail.fullDescription}</p>
+                <h3 class="text-2xl font-semibold mb-2">Specyfikacja</h3>
+                <ul class="list-disc list-inside text-gray-700 mb-4">
+                    ${specsHtml}
+                </ul>
+            `;
+            projectDetailContent.insertAdjacentHTML('beforeend', detailHtml);
+            document.getElementById('main-content').classList.add('hidden-section');
+            document.getElementById('szczegolowe-portfolio').classList.add('hidden-section');
+            document.getElementById('projekt-detal').classList.remove('hidden-section');
+            document.getElementById('faq').classList.add('hidden-section');
+            document.getElementById('o-nas').classList.add('hidden-section');
+            document.getElementById('kontakt').classList.add('hidden-section');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+
+        function showHomePage() {
+            document.getElementById('main-content').classList.remove('hidden-section');
+            document.getElementById('szczegolowe-portfolio').classList.add('hidden-section');
+            document.getElementById('projekt-detal').classList.add('hidden-section');
+            document.getElementById('faq').classList.add('hidden-section');
+            document.getElementById('o-nas').classList.add('hidden-section');
+            document.getElementById('kontakt').classList.add('hidden-section');
+        }
+
+        function showDetailedPortfolioPage() {
+            document.getElementById('main-content').classList.add('hidden-section');
+            document.getElementById('szczegolowe-portfolio').classList.remove('hidden-section');
+            document.getElementById('projekt-detal').classList.add('hidden-section');
+            document.getElementById('faq').classList.add('hidden-section');
+            document.getElementById('o-nas').classList.add('hidden-section');
+            document.getElementById('kontakt').classList.add('hidden-section');
+            generatePortfolio();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showFaqPage() {
+            document.getElementById('main-content').classList.add('hidden-section');
+            document.getElementById('szczegolowe-portfolio').classList.add('hidden-section');
+            document.getElementById('projekt-detal').classList.add('hidden-section');
+            document.getElementById('faq').classList.remove('hidden-section');
+            document.getElementById('o-nas').classList.add('hidden-section');
+            document.getElementById('kontakt').classList.add('hidden-section');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showAboutPage() {
+            document.getElementById('main-content').classList.add('hidden-section');
+            document.getElementById('szczegolowe-portfolio').classList.add('hidden-section');
+            document.getElementById('projekt-detal').classList.add('hidden-section');
+            document.getElementById('faq').classList.add('hidden-section');
+            document.getElementById('o-nas').classList.remove('hidden-section');
+            document.getElementById('kontakt').classList.add('hidden-section');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showContactPage() {
+            document.getElementById('main-content').classList.add('hidden-section');
+            document.getElementById('szczegolowe-portfolio').classList.add('hidden-section');
+            document.getElementById('projekt-detal').classList.add('hidden-section');
+            document.getElementById('faq').classList.add('hidden-section');
+            document.getElementById('o-nas').classList.add('hidden-section');
+            document.getElementById('kontakt').classList.remove('hidden-section');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        document.getElementById('show-home-mobile').addEventListener('click', function(e) {
+            e.preventDefault();
+            showHomePage();
+            document.getElementById('mobile-menu').classList.add('hidden');
+        });
+
+        document.getElementById('show-detailed-portfolio-mobile').addEventListener('click', function(e) {
+            e.preventDefault();
+            showDetailedPortfolioPage();
+            document.getElementById('mobile-menu').classList.add('hidden');
+        });
+
+        document.getElementById('show-faq-mobile').addEventListener('click', function(e) {
+            e.preventDefault();
+            showFaqPage();
+            document.getElementById('mobile-menu').classList.add('hidden');
+        });
+
+        document.getElementById('show-about-mobile').addEventListener('click', function(e) {
+            e.preventDefault();
+            showAboutPage();
+            document.getElementById('mobile-menu').classList.add('hidden');
+        });
+
+        document.getElementById('show-contact-mobile').addEventListener('click', function(e) {
+            e.preventDefault();
+            showContactPage();
+            document.getElementById('mobile-menu').classList.add('hidden');
+        });
+
+        document.getElementById('show-home-desktop').addEventListener('click', function(e) {
+            e.preventDefault();
+            showHomePage();
+        });
+
+        document.getElementById('show-detailed-portfolio').addEventListener('click', function(e) {
+            e.preventDefault();
+            showDetailedPortfolioPage();
+        });
+
+        document.getElementById('show-faq').addEventListener('click', function(e) {
+            e.preventDefault();
+            showFaqPage();
+        });
+
+        document.getElementById('show-about').addEventListener('click', function(e) {
+            e.preventDefault();
+            showAboutPage();
+        });
+
+        document.getElementById('show-contact').addEventListener('click', function(e) {
+            e.preventDefault();
+            showContactPage();
+        });
+
+        document.getElementById('show-home-logo').addEventListener('click', function(e) {
+            e.preventDefault();
+            showHomePage();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId.startsWith('#') && targetId.length > 1) {
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        e.preventDefault();
+                        showHomePage();
+                        setTimeout(() => {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - document.querySelector('header').offsetHeight,
+                                behavior: 'smooth'
+                            });
+                        }, 50);
+                    }
+                }
+            });
+        });
+
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                const icon = header.querySelector('span:last-child');
+                content.classList.toggle('open');
+                if (content.classList.contains('open')) {
+                    icon.textContent = '–';
+                } else {
+                    icon.textContent = '+';
+                }
+            });
+        });
+
+        document.getElementById('back-to-portfolio').addEventListener('click', function(e) {
+            e.preventDefault();
+            showDetailedPortfolioPage();
+        });
+        
+        document.addEventListener('DOMContentLoaded', generatePortfolio);
+    </script>
+</body>
+</html>
