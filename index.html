@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pobieranie plików z GitHuba</title>
+    <title>Otwieranie plików z GitHuba</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Inter Font -->
@@ -16,24 +16,13 @@
         .container {
             max-width: 800px;
         }
-        .animate-pulse-slow {
-            animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-        @keyframes pulse-slow {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: .5;
-            }
-        }
     </style>
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
 
     <div class="container bg-white p-8 rounded-2xl shadow-xl space-y-6">
-        <h1 class="text-3xl font-bold text-center text-gray-800 mb-2">Pobieranie plików z GitHuba</h1>
-        <p class="text-center text-gray-600 mb-6">Wybierz plik z poniższej listy, aby go pobrać.</p>
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-2">Otwieranie plików z GitHuba</h1>
+        <p class="text-center text-gray-600 mb-6">Wybierz plik z poniższej listy, aby go otworzyć w nowej karcie.</p>
 
         <!-- Container for file buttons -->
         <div id="filesContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -51,22 +40,22 @@
             const filesContainer = document.getElementById('filesContainer');
             const messageBox = document.getElementById('messageBox');
 
-            // Array of predefined files to download
-            const filesToDownload = [
+            // Array of predefined files to open
+            const filesToOpen = [
                 {
-                    name: 'Faktura_FV/2025/08/001_Ryba_O5K4RSOLUTIONS',
-                    url: 'dokumenty/faktury/2025/Faktura_FV:2025:08:001_Ryba_O5K4RSOLUTIONS.pdf'
+                    name: 'Otwórz Fakturę PDF',
+                    url: 'https://raw.githubusercontent.com/username/repository/main/dokumenty/faktury/2025/Faktura_FV:2025:08:001_Ryba_O5K4RSOLUTIONS.pdf'
                 },
                 {
-                    name: 'Plik CSV z danymi',
+                    name: 'Otwórz Plik CSV',
                     url: 'https://raw.githubusercontent.com/username/repository/main/data.csv'
                 },
                 {
-                    name: 'Kod JavaScript',
+                    name: 'Otwórz Kod JavaScript',
                     url: 'https://raw.githubusercontent.com/username/repository/main/script.js'
                 },
                 {
-                    name: 'Obrazek PNG',
+                    name: 'Otwórz Obrazek PNG',
                     url: 'https://raw.githubusercontent.com/username/repository/main/image.png'
                 }
             ];
@@ -84,48 +73,27 @@
                 }
             };
 
-            // Function to handle the file download
-            const handleDownload = (fileUrl, fileName, button) => {
+            // Function to handle opening the file
+            const handleOpen = (fileUrl, fileName) => {
                 messageBox.classList.add('hidden'); // Clear previous messages
-                showMessage("Pobieranie pliku...", 'info');
-                button.classList.add('animate-pulse-slow');
-
-                fetch(fileUrl)
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error(`Błąd HTTP: ${response.status}`);
-                        }
-                        return response.blob();
-                    })
-                    .then(blob => {
-                        const link = document.createElement('a');
-                        link.href = URL.createObjectURL(blob);
-                        link.download = fileName;
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                        URL.revokeObjectURL(link.href);
-                        
-                        showMessage(`Plik "${fileName}" został pomyślnie pobrany.`, 'success');
-                    })
-                    .catch(error => {
-                        console.error('Błąd pobierania:', error);
-                        showMessage(`Wystąpił błąd podczas pobierania pliku: ${error.message}. Sprawdź, czy URL jest poprawny.`, 'error');
-                    })
-                    .finally(() => {
-                        button.classList.remove('animate-pulse-slow');
-                    });
+                try {
+                    window.open(fileUrl, '_blank');
+                    showMessage(`Plik "${fileName}" został otwarty w nowej karcie.`, 'success');
+                } catch (error) {
+                    console.error('Błąd otwierania pliku:', error);
+                    showMessage(`Wystąpił błąd podczas otwierania pliku: ${error.message}.`, 'error');
+                }
             };
 
             // Generate buttons for each file
-            filesToDownload.forEach(file => {
+            filesToOpen.forEach(file => {
                 const button = document.createElement('button');
                 button.textContent = file.name;
                 button.className = 'w-full px-6 py-3 text-lg font-semibold text-white bg-blue-600 rounded-xl shadow-md hover:bg-blue-700 transition-colors duration-300';
                 
                 // Add click event listener to the button
                 button.addEventListener('click', () => {
-                    handleDownload(file.url, file.name, button);
+                    handleOpen(file.url, file.name);
                 });
 
                 filesContainer.appendChild(button);
@@ -135,3 +103,4 @@
 
 </body>
 </html>
+
