@@ -18,31 +18,23 @@
 </head>
 <body class="flex flex-col items-center justify-center min-h-screen p-4">
     <div class="container bg-gray-800 rounded-lg shadow-lg p-6 w-full">
-        <h1 class="text-3xl font-bold text-center mb-6 text-white">Moje pliki do pobrania</h1>
-        <p class="text-center mb-8 text-gray-400">Poniżej znajdziesz listę moich plików. Możesz je pobrać klikając w odpowiedni przycisk.</p>
+        <h1 class="text-3xl font-bold text-center mb-6 text-white">Faktury</h1>
+        <p class="text-center mb-8 text-gray-400">FAKTURY O5K4R.</p>
 
         <div id="file-list" class="space-y-4">
-            <!-- Tutaj będą dynamicznie dodawane pliki ze statycznej listy -->
         </div>
 
     </div>
 
     <script>
-        // Poniższy kod JavaScript tworzy statyczną listę plików na podstawie ręcznie
-        // wprowadzonych danych.
 
-        // UWAGA: Edytuj tę tablicę, aby dodać lub usunąć swoje pliki!
-        // Format: { name: 'Wyświetlana nazwa pliku', url: 'Ścieżka do pliku na GitHubie' }
         const filesToDisplay = [
             { name: 'Faktura_FV_2025_08_001_Ryba_O5K4RSOLUTIONS.pdf', url: 'dokumenty/faktury/2025/Faktura_FV:2025:08:001_Ryba_O5K4RSOLUTIONS.pdf' },
-            { name: 'Zdjęcie z wakacji.jpg', url: 'https://raw.githubusercontent.com/twój-login/nazwa-twojego-repozytorium/main/files/zdjecie.jpg' },
-            { name: 'Mój pierwszy kod.zip', url: 'https://raw.githubusercontent.com/twój-login/nazwa-twojego-repozytorium/main/src/kod.zip' },
-            // Dodaj kolejne pliki w tym formacie
+     
         ];
         
         const fileListContainer = document.getElementById('file-list');
 
-        // Funkcja generująca elementy HTML dla każdego pliku z tablicy
         function displayFiles() {
             if (filesToDisplay.length === 0) {
                 fileListContainer.innerHTML = '<p class="text-center text-gray-500">Brak plików do wyświetlenia.</p>';
