@@ -21,19 +21,31 @@
         <h1 class="text-3xl font-bold text-center mb-6 text-white">Faktury</h1>
         <p class="text-center mb-8 text-gray-400">FAKTURY O5K4R.</p>
 
-        <div id="file-list" class="space-y-4">
+        <div id="password-form-container" class="flex flex-col items-center justify-center">
+            <p class="text-white text-lg mb-4">Wprowadź hasło, aby kontynuować:</p>
+            <input type="password" id="password-input" class="w-full max-w-sm px-4 py-2 mb-4 rounded-full bg-gray-900 text-gray-200 border-2 border-gray-700 focus:outline-none focus:border-green-600">
+            <button id="submit-button" class="w-full max-w-sm px-4 py-2 bg-green-600 text-white rounded-full shadow-md hover:bg-green-700 transition-colors focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-800">
+                Weryfikuj
+            </button>
+            <p id="error-message" class="mt-4 text-red-500 text-center hidden"></p>
+        </div>
+
+        <div id="file-list" class="space-y-4 hidden">
         </div>
 
     </div>
 
     <script>
-
         const filesToDisplay = [
             { name: 'Faktura_FV_2025_08_001_Ryba_O5K4RSOLUTIONS.pdf', url: 'dokumenty/faktury/2025/Faktura_FV:2025:08:001_Ryba_O5K4RSOLUTIONS.pdf' },
             { name: 'logof', url: 'dokumenty/logoo5k4r.png' },
         ];
         
         const fileListContainer = document.getElementById('file-list');
+        const passwordInput = document.getElementById('password-input');
+        const submitButton = document.getElementById('submit-button');
+        const passwordFormContainer = document.getElementById('password-form-container');
+        const errorMessage = document.getElementById('error-message');
 
         function displayFiles() {
             if (filesToDisplay.length === 0) {
@@ -62,12 +74,22 @@
             });
         }
 
-        window.onload = function() {
-            displayFiles();
-        };
+        submitButton.addEventListener('click', () => {
+            const enteredPassword = passwordInput.value.toUpperCase();
+            const correctPassword = atob('TUFTTE9XRFVQRVRSWkFTTE8=');
 
+            if (enteredPassword === correctPassword) {
+                passwordFormContainer.classList.add('hidden');
+                fileListContainer.classList.remove('hidden');
+                displayFiles();
+            } else {
+                errorMessage.textContent = 'Nieprawidłowe hasło. Spróbuj ponownie.';
+                errorMessage.classList.remove('hidden');
+            }
+        });
     </script>
 </body>
 </html>
+
 
 
