@@ -3,104 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Otwieranie plików z GitHuba</title>
-    <!-- Tailwind CSS CDN -->
+    <title>Pobieranie plików</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Inter Font -->
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
         body {
+            background-color: #0d1117;
+            color: #c9d1d9;
             font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6;
         }
         .container {
             max-width: 800px;
         }
     </style>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+<body class="flex flex-col items-center justify-center min-h-screen p-4">
+    <div class="container bg-gray-800 rounded-lg shadow-lg p-6 w-full">
+        <h1 class="text-3xl font-bold text-center mb-6 text-white">Moje pliki do pobrania</h1>
+        <p class="text-center mb-8 text-gray-400">Poniżej znajdziesz listę moich plików. Możesz je pobrać klikając w odpowiedni przycisk.</p>
 
-    <div class="container bg-white p-8 rounded-2xl shadow-xl space-y-6">
-        <h1 class="text-3xl font-bold text-center text-gray-800 mb-2">Otwieranie plików z GitHuba</h1>
-        <p class="text-center text-gray-600 mb-6">Wybierz plik z poniższej listy, aby go otworzyć w nowej karcie.</p>
-
-        <!-- Container for file buttons -->
-        <div id="filesContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <!-- File buttons will be generated here by JavaScript -->
+        <div id="file-list" class="space-y-4">
+            <!-- Tutaj będą dynamicznie dodawane pliki ze statycznej listy -->
         </div>
-
-        <!-- Status and Message Display -->
-        <div id="messageBox" class="p-4 mt-4 rounded-xl text-center hidden"></div>
 
     </div>
 
     <script>
-        // Wait for the window to load before running the script
-        window.onload = function() {
-            const filesContainer = document.getElementById('filesContainer');
-            const messageBox = document.getElementById('messageBox');
+        // Poniższy kod JavaScript tworzy statyczną listę plików na podstawie ręcznie
+        // wprowadzonych danych.
 
-            // Array of predefined files to open
-            const filesToOpen = [
-                {
-                    name: 'Otwórz Fakturę PDF',
-                    url: 'https://raw.githubusercontent.com/username/repository/main/dokumenty/faktury/2025/Faktura_FV:2025:08:001_Ryba_O5K4RSOLUTIONS.pdf'
-                },
-                {
-                    name: 'Otwórz Plik CSV',
-                    url: 'https://raw.githubusercontent.com/username/repository/main/data.csv'
-                },
-                {
-                    name: 'Otwórz Kod JavaScript',
-                    url: 'https://raw.githubusercontent.com/username/repository/main/script.js'
-                },
-                {
-                    name: 'Otwórz Obrazek PNG',
-                    url: 'https://raw.githubusercontent.com/username/repository/main/image.png'
-                }
-            ];
+        // UWAGA: Edytuj tę tablicę, aby dodać lub usunąć swoje pliki!
+        // Format: { name: 'Wyświetlana nazwa pliku', url: 'Ścieżka do pliku na GitHubie' }
+        const filesToDisplay = [
+            { name: 'Faktura_FV_2025_08_001_Ryba_O5K4RSOLUTIONS.pdf', url: 'dokumenty/faktury/2025/Faktura_FV:2025:08:001_Ryba_O5K4RSOLUTIONS.pdf' },
+            { name: 'Zdjęcie z wakacji.jpg', url: 'https://raw.githubusercontent.com/twój-login/nazwa-twojego-repozytorium/main/files/zdjecie.jpg' },
+            { name: 'Mój pierwszy kod.zip', url: 'https://raw.githubusercontent.com/twój-login/nazwa-twojego-repozytorium/main/src/kod.zip' },
+            // Dodaj kolejne pliki w tym formacie
+        ];
+        
+        const fileListContainer = document.getElementById('file-list');
 
-            // Function to display a message to the user
-            const showMessage = (text, type = 'info') => {
-                messageBox.textContent = text;
-                messageBox.classList.remove('hidden', 'bg-red-200', 'text-red-800', 'bg-green-200', 'text-green-800', 'bg-blue-200', 'text-blue-800');
-                if (type === 'error') {
-                    messageBox.classList.add('bg-red-200', 'text-red-800');
-                } else if (type === 'success') {
-                    messageBox.classList.add('bg-green-200', 'text-green-800');
-                } else {
-                    messageBox.classList.add('bg-blue-200', 'text-blue-800');
-                }
-            };
+        // Funkcja generująca elementy HTML dla każdego pliku z tablicy
+        function displayFiles() {
+            if (filesToDisplay.length === 0) {
+                fileListContainer.innerHTML = '<p class="text-center text-gray-500">Brak plików do wyświetlenia.</p>';
+                return;
+            }
 
-            // Function to handle opening the file
-            const handleOpen = (fileUrl, fileName) => {
-                messageBox.classList.add('hidden'); // Clear previous messages
-                try {
-                    window.open(fileUrl, '_blank');
-                    showMessage(`Plik "${fileName}" został otwarty w nowej karcie.`, 'success');
-                } catch (error) {
-                    console.error('Błąd otwierania pliku:', error);
-                    showMessage(`Wystąpił błąd podczas otwierania pliku: ${error.message}.`, 'error');
-                }
-            };
-
-            // Generate buttons for each file
-            filesToOpen.forEach(file => {
-                const button = document.createElement('button');
-                button.textContent = file.name;
-                button.className = 'w-full px-6 py-3 text-lg font-semibold text-white bg-blue-600 rounded-xl shadow-md hover:bg-blue-700 transition-colors duration-300';
+            filesToDisplay.forEach(file => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'flex items-center justify-between p-4 bg-gray-700 rounded-lg shadow-md';
                 
-                // Add click event listener to the button
-                button.addEventListener('click', () => {
-                    handleOpen(file.url, file.name);
-                });
-
-                filesContainer.appendChild(button);
+                const fileName = document.createElement('span');
+                fileName.textContent = file.name;
+                fileName.className = 'text-gray-200 text-lg font-medium truncate';
+                
+                const downloadButton = document.createElement('a');
+                downloadButton.href = file.url; 
+                downloadButton.download = file.name;
+                downloadButton.textContent = 'Pobierz';
+                downloadButton.className = 'px-4 py-2 bg-green-600 text-white rounded-full shadow-md hover:bg-green-700 transition-colors focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-800';
+                
+                fileItem.appendChild(fileName);
+                fileItem.appendChild(downloadButton);
+                
+                fileListContainer.appendChild(fileItem);
             });
-        };
-    </script>
+        }
 
+        window.onload = function() {
+            displayFiles();
+        };
+
+    </script>
 </body>
 </html>
+
 
